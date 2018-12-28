@@ -1,0 +1,6 @@
+{
+    "temp": {
+        "path":"./tmp",
+        "userdata":"./tmp/userdata"
+    }
+}
