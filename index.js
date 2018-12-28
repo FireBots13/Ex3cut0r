@@ -27,7 +27,7 @@ client.on("message", (message) => {
 client.on("ready", () => {
 fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
 	fp = JSON.parse(fp)
-    console.log("[LOGGED ON] " +client.user.tag)
+    console.log("[LOGGED ON] " +client.user.tag + " | " + client.user.id)
 
     function activityUpdate() {
 

@@ -19,6 +19,7 @@ module.exports.run = (client, message, args, config, color) => {
                         '`morsecode` - Encode text in morscode\n' +
                         '`randomcolor` - Generate a random color' +
                         '`reverse` - Reverse text\n' +  
+                        '`txt` - Write your message to a text file\n' +
                         '`url` - Shorten a URL')
                         return message.channel.send(embed)
     
