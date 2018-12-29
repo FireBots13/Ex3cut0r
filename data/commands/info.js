@@ -14,6 +14,7 @@ module.exports.run = (client, message, args, config, color) => {
         .addField("Website", "[HackerHub](https://www.hacker-hub.com)", true)
         .addField("Developer", "[TheHacker](https://skylarmccauley.xyz)", true)
         .addField("Discord Bot List", "[DBL](https://discordbots.org/bot/498497197344817152)", true)
+        .addField("Discord Bots", "[D.B.GG](https://discord.bots.gg/bots/498497197344817152)", true)
         .addField("Server Count", "`" + client.guilds.size + "`", true)
         .addField("Version", "`" + config.version + "`", true)
     return message.channel.send(embed)
