@@ -5,7 +5,9 @@ const package = require('./package.json')
 const fs = require('fs')
 const fse = require('fs-extra')
 var request = require('request')
-
+const DBLToken = config.dbltoken
+const DBL = require('dblapi.js')
+const dbl = new DBL(DBLToken) 
 
 const client = new Discord.Client({
     autoReconnect: true
@@ -16,7 +18,6 @@ client.on("message", (message) => {
 
     const args = message.content.split(" ");
   const command = message.content.split(" ")[0]
-  console.log(args)
 
   if(message.author.bot || !command.startsWith(prefix) || message.channel.type === "dm") return;
 
@@ -31,7 +32,7 @@ fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
 
     function activityUpdate() {
 
-        //dbl.postStats(client.guilds.size)
+        dbl.postStats(client.guilds.size)
         client.user.setActivity('on ' + client.guilds.size + ' servers', {
             type: 'WATCHING'
         })

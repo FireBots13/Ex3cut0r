@@ -1,5 +1,6 @@
 {
-    "token":"INSERT TOKEN HERE",
+    "token":"NME",
+    "dbltoken":"NME",
     "version": "1.0.0",
     "color": "#FFA500",
     "prefix": "ex!"
