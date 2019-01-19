@@ -22,6 +22,8 @@ module.exports.run = (client, message, args, config, color) => {
                         '`txt` - Write your message to a text file\n' +
                         '`rot` - Encode a string with ROT1 thru ROT25\n' +
                         '`sha1` - Encode a string with SHA1 Checksum\n' +
+                        '`sha256` - Encode a string with SHA256 Checksum\n' +
+                        '`md5` - Encode a string with MD5 Checksum\n'+
                         '`url` - Shorten a URL')
                         return message.channel.send(embed)
     

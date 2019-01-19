@@ -34,6 +34,7 @@ fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
             fs.writeFile(`${fp.temp.userdata}/${message.author.id}/leet.txt`, rawText, function(err) {
             if(err) return message.channel.send(err)
             
+            if(parseInt(encodedText.length) + parseInt(text.length) > 1500) return message.channel.send({message: `Leet Encoded`, file: `${fp.temp.userdata}/${message.author.id}/leet.txt`})
             var encoded = embed.basicFooterAuthorEmbed("L33t Encoded", '`' + encodedText + '`', message.author.username, message.author.displayAvatarURL,"Generated at " + moment().format('MMMM Do YYYY, h:mm:ss a'), color)
             return message.channel.send({embed: encoded, file: `${fp.temp.userdata}/${message.author.id}/leet.txt`})
             })

@@ -29,11 +29,13 @@ module.exports.run = (client, message, args, config, color) => {
 	    
 	    const sha1 = getSHA1ofJSON(text)
 	    
-	    var rawText = "Decoded: `" + text + "`\nEncoded: `" + sha1 + "`"
+	    var rawText = "Encoded: `" + sha1 + "`\nDecoded: `" + text + "`"
 	    
 	    fs.writeFile(`${fp.temp.userdata}/${message.author.id}/sha1.txt`, rawText, function(err) {
             if(err) return message.channel.send(err)
             
+            	 if(parseInt(sha1.length) + parseInt(text.length) > 1500) return message.channel.send({file: `SHA1 Encoded`, file: `${fp.temp.userdata}/${message.author.id}/sha1.txt`})         
+        
             var encoded = embed.basicFooterAuthorEmbed("SHA1 Encoded", '`' + sha1 + '`', message.author.username, message.author.displayAvatarURL,"Generated at " + moment().format('MMMM Do YYYY, h:mm:ss a'), color)
             return message.channel.send({embed: encoded, file: `${fp.temp.userdata}/${message.author.id}/sha1.txt`})
             })

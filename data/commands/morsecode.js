@@ -40,9 +40,12 @@ module.exports.run = (client, message, args, config, color) => {
         var rawText = "Encoded `" + morse.encode(text) + "`\nDecoded: `" + text + "`"
             fs.writeFile(`${fp.temp.userdata}/${message.author.id}/morsecode.txt`, rawText, function(err) {
                 if(err) return message.channel.send(err)
-    
-                message.channel.send("**" + message.author.tag + "** - `ENCODED`", {file: `${fp.temp.userdata}/${message.author.id}/morsecode.txt`})
-                return;
+                
+                  if(parseInt(morse.encode(text).length) + parseInt(text.length) > 1500) return message.channel.send({file: `Morsecode Encoded`, file: `${fp.temp.userdata}/${message.author.id}/moresecode.txt`})         
+         
+        var encode = embed.basicFooterAuthorEmbed("Encoded MorseCode", "**Encoded** - `" + morse.encode(text) + "`\n**Decoded** - `" + text + '`', message.author.name, message.author.displayAvatarURL, "Generated at " + moment().format('MMMM Do YYYY, h:mm:ss a'), color)
+        
+        return message.channel.send({ embed: encode, file: `${fp.temp.userdata}/${message.author.id}/morsecode.txt`})
             })
         } catch (ex) {
             return message.channel.send(ex)
@@ -59,9 +62,14 @@ module.exports.run = (client, message, args, config, color) => {
         var rawText = "Decoded: `" + morse.decode(text) + "`\nEncoded: `" + text + "`"
             fs.writeFile(`${fp.temp.userdata}/${message.author.id}/morsecode.txt`, rawText, function(err) {
                 if(err) return message.channel.send(err)
-    
-                message.channel.send("**" + message.author.tag + "** - `DECODED`", {file: `${fp.temp.userdata}/${message.author.id}/morsecode.txt`})
-                return;
+                
+     if(parseInt(morse.decode(text).length) + parseInt(text.length) > 1500) return message.channel.send({file: `Morsecode Decoded`, file: `${fp.temp.userdata}/${message.author.id}/moresecode.txt`})         
+         
+        var decode = embed.basicFooterAuthorEmbed("Decoded MorseCode", "**Decoded** - `" + morse.decode(text) + "`\n**Encoded** - `" + text + '`', message.author.name, message.author.displayAvatarURL, "Generated at " + moment().format('MMMM Do YYYY, h:mm:ss a'), color)
+        
+        return message.channel.send({ embed: decode, file: `${fp.temp.userdata}/${message.author.id}/morsecode.txt`})
+       
+                   return;
             })
         } catch (ex) {
             return message.channel.send(ex)

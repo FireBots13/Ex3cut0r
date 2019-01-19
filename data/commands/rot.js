@@ -43,6 +43,8 @@ fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
         var rawData = `Encoded: ${rot(text, rotVer)}\nDecoded: ${text}`
         	fs.writeFile(`${fp.temp.userdata}/${message.author.id}/rot.txt`, rawData, function(err) {
         	
+        	 if(parseInt(rot(text, rotVer).length) + parseInt(text.length) > 1500) return message.channel.send({file: `Morsecode Encoded`, file: `${fp.temp.userdata}/${message.author.id}/rot.txt`})         
+        
         	
         var encoded = embed.basicFooterAuthorEmbed("Encoded Rot " + rotVer, "**Encoded**\n`" + rot(text, rotVer) + '`\n\n**Decoded**\n`' + text + '`', message.author.username, message.author.displayAvatarURL, "Generated at " + moment().format('MMMM Do YYYY, h:mm:ss a'), color);
 		

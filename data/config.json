@@ -1,7 +1,7 @@
 {
-    "token":"NME",
-    "dbltoken":"NME",
-    "version": "1.0.0",
+    "token":"",
+    "dbltoken":"",
+    "version": "1.1.0",
     "color": "#FFA500",
     "prefix": "ex!"
 }

@@ -68,6 +68,10 @@ fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
         
         try {
         	fs.writeFile(`${fp.temp.userdata}/${message.author.id}/base64.txt`, rawText, function(err) {
+        	if(err) return message.channel.send(err)
+        	
+        	if(parseInt(buff.length) + parseInt(text.length) > 1500) return message.channel.send({message: `Base64 Decoded`, file: `${fp.temp.userdata}/${message.author.id}/base64.txt`})
+        	
         	var decoded = embed.basicFooterAuthorEmbed("Decoded Base64 String", "**Encoded** - `" + buff + "`\n\n**Decoded** - `" + text + "`", message.author.username, message.author.displayAvatarURL, "Generated at " + moment().format('MMMM Do YYYY, h:mm:ss a'), color)
         return message.channel.send({embed: decoded, file: `${fp.temp.userdata}/${message.author.id}/base64.txt`})
         })

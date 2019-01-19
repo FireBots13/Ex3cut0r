@@ -29,7 +29,13 @@ fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
     
     var rawText = "Reversed: `" + reverse(text) + "`\nNon-Reversed: `" + text + "`"
     fs.writeFile(`${fp.temp.userdata}/${message.author.id}/reverse.txt`, rawText, function(err) {
-        return message.channel.send("`" + reverse(text) + "`", {file: `${fp.temp.userdata}/${message.author.id}/reverse.txt`})
+    
+     if(parseInt(reverse(text).length) + parseInt(text.length) > 1500) return message.channel.send({file: `Text Reversed`, file: `${fp.temp.userdata}/${message.author.id}/reverse.txt`})         
+         
+        var reversed = embed.basicFooterAuthorEmbed("Reversed Text", "**Reversed** - `" + reverse(text) + "`\n**Non-reversed** - `" + text + '`', message.author.name, message.author.displayAvatarURL, "Generated at " + moment().format('MMMM Do YYYY, h:mm:ss a'), color)
+        
+        return message.channel.send({ embed: reversed, file: `${fp.temp.userdata}/${message.author.id}/reverse.txt`})
+       
         });
     } catch (ex) {
         return message.channel.send(ex)

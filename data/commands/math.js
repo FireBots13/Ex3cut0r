@@ -30,6 +30,8 @@ fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
             fs.writeFile(`${fp.temp.userdata}/${message.author.id}/math.txt`, rawText, function(err) {
             if(err) return message.channel.send(err)
             
+            if(parseInt(expression.length) + parseInt(scalc(expression).length) > 1500) return message.channel.send({message: `Math Expression Calculated`, file: `${fp.temp.userdata}/${message.author.id}/math.txt`})
+        	
     var calculatedExpression = embed.basicFooterAuthorEmbed("Math Expression Calculated", "`" + scalc(expression) + "`", message.author.username, message.author.displayAvatarURL, "", color)
 
     return message.channel.send({ embed: calculatedExpression, file: `${fp.temp.userdata}/${message.author.id}/math.txt`});

@@ -50,7 +50,10 @@ fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
         var rawText = "Encoded: `"+ asciiToBin(text) + "`\nDecoded: `" + text + "`"
         
         try {
+
              fs.writeFile(`${fp.temp.userdata}/${message.author.id}/binary.txt`, rawText, function(err) {
+         
+         if(parseInt(binToAscii(text).length) + parseInt(text.length) > 1500) return message.channel.send({file: `Binary Encoded`, file: `${fp.temp.userdata}/${message.author.id}/binary.txt`})         
          
         var encode = embed.basicFooterAuthorEmbed("Encoded Binary", "**Encoded** - `" + asciiToBin(text) + "`\n**Decoded** - `" + text + '`', message.author.name, message.author.displayAvatarURL, "Generated at " + moment().format('MMMM Do YYYY, h:mm:ss a'), color)
         return message.channel.send({ embed: encode, file: `${fp.temp.userdata}/${message.author.id}/binary.txt`})
@@ -62,12 +65,16 @@ fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
         return;
     }
     if(mode == modes[1]) {
+    //Decoded
         if(!text) return message.channel.send(binaryHelp)
         
         var rawText = "Encoded:  `" + binToAscii(text) +  "`\nDecoded: `" + text + "`"
         
         try {
         	fs.writeFile(`${fp.temp.userdata}/${message.author.id}/binary.txt`, rawText, function(err) {
+        	
+        	if(parseInt(binToAscii(text).length) + parseInt(text.length) > 1500) return message.channel.send({message: `Binary Decoded`, file: `${fp.temp.userdata}/${message.author.id}/binary.txt`})
+        	
         	var decoded = embed.basicFooterAuthorEmbed("Decoded Binary", "**Decoded** - `" + binToAscii(text) + "`\n**Encoded** - `" + text+ '`', message.author.name, message.author.displayAvatarURL, "Generated at " + moment().format('MMMM Do YYYY, h:mm:ss a'), color)
         return message.channel.send({embed: decoded, file: `${fp.temp.userdata}/${message.author.id}/binary.txt`})
         });
