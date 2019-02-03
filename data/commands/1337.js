@@ -24,7 +24,20 @@ module.exports.run = (client, message, args, config, color) => {
 		fs.mkdirSync(`${fp.temp.userdata}/${message.author.id}`)
 	}
 	
+	fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, pref) {
 	
+	if(Math.random() > 0.75) {
+            	fs.readFile(`./data/announcement.json`, function (err, announcementDat) {
+                                if(err) return message.channel.send(strings.error_occured + err)
+
+                                var announcementObj = JSON.parse(announcementDat)
+
+                                if(announcementObj.active) {
+                                    message.channel.send(`**${announcementObj.msg}**`)
+                                  }
+                    }) 
+    }
+            
     var leetHelp = embed.commandHelpEmbed("Leet", "Encode  a string in Leet (1337)\n\n**Encode**\n`1337 encode leet`", client.user.username, client.user.displayAvatarURL, "Generated at " + moment().format('MMMM Do YYYY, h:mm:ss a'), color)
 
     if(!mode) return message.channel.send(leetHelp)
@@ -37,6 +50,8 @@ module.exports.run = (client, message, args, config, color) => {
             var rawText = "Encoded: `" + encodedText + "`\nDecoded: `" + text + "`" 
             fs.writeFile(`${fp.temp.userdata}/${message.author.id}/leet.txt`, rawText, function(err) {
             if(err) return message.channel.send(err)
+            
+            
             
             if(parseInt(encodedText.length) + parseInt(text.length) > 1500) return message.channel.send({message: `1337 Encoded`, file: `${fp.temp.userdata}/${message.author.id}/leet.txt`})
             
@@ -56,6 +71,7 @@ module.exports.run = (client, message, args, config, color) => {
     return message.channel.send(leetHelp)
 	
 	})
+	});
 
 }
 module.exports.help = {

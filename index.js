@@ -51,6 +51,12 @@ fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
     if(!fs.existsSync(fp.temp.userdata)) {
     fs.mkdirSync(fp.temp.userdata)
     }
+    if(!fs.existsSync(fp.data.serverdata)) {
+    fs.mkdirSync(fp.data.serverdata)
+    }
+    if(!fs.existsSync(fp.persistent.path)) {
+    fs.mkdirSync(fp.persistent.path)
+    }
     });
 })
 
@@ -71,12 +77,26 @@ client.commands = new Discord.Collection();
   })
 
   client.on("message", (message) => {
-    if(!fs.existsSync(`./tmp`)) {
-        fs.mkdirSync(`./tmp`)
+  fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
+	fp = JSON.parse(fp)
+	
+    if(!fs.existsSync(`${fp.temp.path}`)) {
+        fs.mkdirSync(`${fp.temp.path}`)
     }
-    if(!fs.existsSync(`./tmp/${message.guild.id}`)) {
-        fs.mkdirSync(`./tmp/${message.guild.id}`)
+    if(!fs.existsSync(`${fp.data.serverdata}`)) {
+        fs.mkdirSync(`${fp.data.serverdata}`)
     }
+    if(!fs.existsSync(`${fp.data.serverdata}/${message.guild.id}`)) {
+        fs.mkdirSync(`${fp.data.serverdata}/${message.guild.id}`)
+    }
+    if(message.channel.type == 'text') {
+	if(!fs.existsSync(`${fp.temp.path}/${message.guild.id}`)) {
+        fs.mkdirSync(`${fp.temp.path}/${message.guild.id}`)
+    }    
+    
+    }
+    });
+    
     
   })
   client.on("message", (message) => {

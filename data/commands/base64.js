@@ -20,6 +20,17 @@ fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
 		fs.mkdirSync(`${fp.temp.userdata}/${message.author.id}`)
 	}
 	
+	if(Math.random() > 0.75) {
+            	fs.readFile(`./data/announcement.json`, function (err, announcementDat) {
+                                if(err) return message.channel.send(strings.error_occured + err)
+
+                                var announcementObj = JSON.parse(announcementDat)
+
+                                if(announcementObj.active) {
+                                    message.channel.send(`**${announcementObj.msg}**`)
+                                  }
+                    }) 
+    }
 	
     var noMode = embed.commandHelpEmbed("Base64", "Encode or Decode a string in Base64\n\n**Encode Text**\n`base64 encode https://www.hacker-hub.com/`\n**Decode Text**\n`base64 decode aHR0cHM6Ly93d3cuaGFja2VyLWh1Yi5jb20v`", client.user.username, client.user.displayAvatarURL, "",color)
 	

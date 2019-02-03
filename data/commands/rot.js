@@ -9,6 +9,18 @@ module.exports.run = (client, message, args, config, color) => {
     var rotVer = args[1] // 1 - 25
     var mode = args[2]
 	
+	if(Math.random() > 0.75) {
+            	fs.readFile(`./data/announcement.json`, function (err, announcementDat) {
+                                if(err) return message.channel.send(strings.error_occured + err)
+
+                                var announcementObj = JSON.parse(announcementDat)
+
+                                if(announcementObj.active) {
+                                    message.channel.send(`**${announcementObj.msg}**`)
+                                  }
+                    }) 
+    }
+	
 fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
 	fp = JSON.parse(fp)
 	

@@ -2,5 +2,13 @@
     "temp": {
         "path":"./tmp",
         "userdata":"./tmp/userdata"
+        
+    },
+    "data" : {
+    	"path": "./data",
+    	"serverdata":"./data/serverdata"
+    },
+    "persistent": {
+    	"path": "./data/persistent"
     }
 }

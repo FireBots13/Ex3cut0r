@@ -19,6 +19,18 @@ fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
 		fs.mkdirSync(`${fp.temp.userdata}/${message.author.id}`)
 	}
 	
+	if(Math.random() > 0.75) {
+            	fs.readFile(`./data/announcement.json`, function (err, announcementDat) {
+                                if(err) return message.channel.send(strings.error_occured + err)
+
+                                var announcementObj = JSON.parse(announcementDat)
+
+                                if(announcementObj.active) {
+                                    message.channel.send(`**${announcementObj.msg}**`)
+                                  }
+                    }) 
+    }
+	
     var binaryHelp = embed.commandHelpEmbed("Binary", "Encode or Decode a string in Binary\n\n" +
                                         "**Encode Text**\n" +
                                         "`binary encode lol`\n" +

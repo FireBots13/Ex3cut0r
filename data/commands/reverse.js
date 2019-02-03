@@ -18,7 +18,18 @@ fs.readFile(`./data/src/utils/filePath.json`, "utf8", function(err, fp) {
 	function reverse(s){
     return s.split("").reverse().join("");
 }
+if(Math.random() > 0.75) {
+            	fs.readFile(`./data/announcement.json`, function (err, announcementDat) {
+                                if(err) return message.channel.send(strings.error_occured + err)
 
+                                var announcementObj = JSON.parse(announcementDat)
+
+                                if(announcementObj.active) {
+                                    message.channel.send(`**${announcementObj.msg}**`)
+                                  }
+                    }) 
+    }
+	
     var text = message.content.split(' ').slice(1).join(' ')
 
     var noText = embed.commandHelpEmbed("Reverse Help", "Reverse texts through unicode\n\n**Example**\n`reverse Reverse this text`", client.user.username, client.user.displayAvatarURL, "", color)

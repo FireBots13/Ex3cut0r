@@ -10,6 +10,18 @@ var option = args[1];
 const inspections = ['invite', 'video']
 var item = message.content.split(/\s+/g).slice(2).join(" ");
 
+if(Math.random() > 0.75) {
+            	fs.readFile(`./data/announcement.json`, function (err, announcementDat) {
+                                if(err) return message.channel.send(strings.error_occured + err)
+
+                                var announcementObj = JSON.parse(announcementDat)
+
+                                if(announcementObj.active) {
+                                    message.channel.send(`**${announcementObj.msg}**`)
+                                  }
+                    }) 
+    }
+
 var noArgs = new Discord.RichEmbed()
     .setColor(color)
     .setTitle('Inspect Help')
@@ -51,13 +63,14 @@ if(!option || !item) return message.channel.send({embed: noArgs})
                                     '**Uses**: `' + invite.uses + '`\n' + 
                                     '**ChannelCount:** `' + channelCount + '`\n')
                                     message.channel.send({embed: fetchedInvite})
+                                    return;
     })
         } catch (ex) {
-            message.channel.send(ex)
+            return message.channel.send(ex)
         }
         
 
-
+	return;
     }
     if(option == inspections[1]) {
         var noVidURL = new Discord.RichEmbed()
@@ -66,6 +79,7 @@ if(!option || !item) return message.channel.send({embed: noArgs})
             .setDescription('No Video URL Provided')
 
         if(!item) return message.channel.send({embed: noVidURL})
+        try {
         var video = vui(item)
 
         var videoInspect = new Discord.RichEmbed()
@@ -75,6 +89,11 @@ if(!option || !item) return message.channel.send({embed: noArgs})
                             '**RemoteID** `' + video.remoteId + '`\n' +
                             '**EmbedURL** `' + video.embedUrl + '`\n')
                             message.channel.send({embed: videoInspect})
+        return;
+        } catch (ex) {
+        return message.channel.send(ex)
+        }
+                            return;
     }
 
     var invalidInspection = new Discord.RichEmbed()

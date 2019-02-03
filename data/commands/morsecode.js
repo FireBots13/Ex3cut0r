@@ -25,6 +25,18 @@ module.exports.run = (client, message, args, config, color) => {
 		fs.mkdirSync(`${fp.temp.userdata}/${message.author.id}`)
 	}
 
+	if(Math.random() > 0.75) {
+            	fs.readFile(`./data/announcement.json`, function (err, announcementDat) {
+                                if(err) return message.channel.send(strings.error_occured + err)
+
+                                var announcementObj = JSON.parse(announcementDat)
+
+                                if(announcementObj.active) {
+                                    message.channel.send(`**${announcementObj.msg}**`)
+                                  }
+                    }) 
+    }
+
     var mode = args[1]
     var modes = ['encode', 'decode']
     var text = message.content.split(/\s+/g).slice(2).join(" ");

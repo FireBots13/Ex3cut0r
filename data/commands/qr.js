@@ -15,6 +15,18 @@ module.exports.run = (client, message, args, config, color) => {
         fs.mkdir(`./tmp/${message.guild.id}`)
     }
     
+    if(Math.random() > 0.75) {
+            	fs.readFile(`./data/announcement.json`, function (err, announcementDat) {
+                                if(err) return message.channel.send(strings.error_occured + err)
+
+                                var announcementObj = JSON.parse(announcementDat)
+
+                                if(announcementObj.active) {
+                                    message.channel.send(`**${announcementObj.msg}**`)
+                                  }
+                    }) 
+    }
+    
     var e = -1
 
     var data = message.content.split(' ').slice(1).join(' ')
